@@ -1,0 +1,23 @@
+meta {
+  name: create
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:8080/pessoas
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "apelido": "me",
+    "nome": "My Name",
+    "nascimento": "2000-01-12"
+  }
+}

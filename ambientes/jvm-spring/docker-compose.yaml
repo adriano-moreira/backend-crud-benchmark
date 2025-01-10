@@ -1,0 +1,42 @@
+services:
+  crud-spring-jvm:
+    image: docker.io/adrianomoreira86/crud-spring-jvm:latest
+    container_name: crud-spring-jvm
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/rinha
+      SPRING_DATASOURCE_USERNAME: admin
+      SPRING_DATASOURCE_PASSWORD: 123
+      SPRING_DATASOURCE_HIKARI_MAXIMUMPOOLSIZE: 16
+      SPRING_DATA_REDIS_HOST: redis
+      SPRING_DATA_REDIS_PORT: 6379
+    deploy:
+      resources:
+        limits:
+          cpus: "2.0"
+          memory: "512MB"
+
+  db:
+    image: postgres:17.2-alpine
+    hostname: db
+    environment:
+      - POSTGRES_PASSWORD=123
+      - POSTGRES_USER=admin
+      - POSTGRES_DB=rinha
+    ports:
+      - "5432:5432"
+    volumes:
+      - ../script.sql:/docker-entrypoint-initdb.d/script.sql:ro
+    deploy:
+      resources:
+        limits:
+          cpus: "3.0"
+          memory: "1024MB"
+  redis:
+    image: redis:7.4-alpine
+    deploy:
+      resources:
+        limits:
+          cpus: "2.0"
+          memory: "1024MB"

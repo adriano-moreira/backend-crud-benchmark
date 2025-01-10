@@ -1,0 +1,24 @@
+{
+    "tasks": {
+      "build": "deno compile --check --allow-read --allow-env --allow-net --output dist/main src/main.ts",
+      "dev": "deno run --watch --allow-read --allow-env --allow-net src/main.ts"
+    },
+    "imports": {
+      "@nestjs/common": "npm:@nestjs/common@^10.0.0",
+      "@nestjs/core": "npm:@nestjs/core@^10.0.0",
+      "@nestjs/platform-express": "npm:@nestjs/platform-express@^10.0.0",
+      "@nestjs/typeorm": "npm:@nestjs/typeorm@^10.0.2",
+      "pg": "npm:pg@^8.13.1",
+      "redis": "npm:redis@^4.7.0",
+      "reflect-metadata": "npm:reflect-metadata@^0.2.0",
+      "rxjs": "npm:rxjs@^7.8.1",
+      "typeorm": "npm:typeorm@^0.3.20",
+      "express": "npm:express@^4.21.2"
+    },
+    "nodeModulesDir": "auto",
+    "compilerOptions": {
+      "experimentalDecorators": true,
+      "emitDecoratorMetadata": true
+    }
+  }
+

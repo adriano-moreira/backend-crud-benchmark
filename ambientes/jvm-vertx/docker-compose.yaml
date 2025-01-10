@@ -1,0 +1,42 @@
+services:
+  crud-vertx-jvm:
+    image: docker.io/adrianomoreira86/crud-vertx-jvm:latest
+    container_name: crud-vertx-jvm
+    ports:
+      - "8080:8080"
+    environment:
+      DATASOURCE_HOST: db
+      DATASOURCE_PORT: 5432
+      DATASOURCE_USERNAME: admin
+      DATASOURCE_PASSWORD: 123
+      DATASOURCE_DATABASE: rinha
+      REDIS_CONNECTION_STRING: redis://redis:6379
+    deploy:
+      resources:
+        limits:
+          cpus: "2.0"
+          memory: "512MB"
+
+  db:
+    image: postgres:17.2-alpine
+    hostname: db
+    environment:
+      - POSTGRES_PASSWORD=123
+      - POSTGRES_USER=admin
+      - POSTGRES_DB=rinha
+    ports:
+      - "5432:5432"
+    volumes:
+      - ../script.sql:/docker-entrypoint-initdb.d/script.sql:ro
+    deploy:
+      resources:
+        limits:
+          cpus: "3.0"
+          memory: "1024MB"
+  redis:
+    image: redis:7.4-alpine
+    deploy:
+      resources:
+        limits:
+          cpus: "2.0"
+          memory: "1024MB"
